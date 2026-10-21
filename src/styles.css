@@ -1583,3 +1583,405 @@ h4 {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ================================================================== EXAM */
+.exam {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.exam-kicker {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.exam-gate {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 22px 24px 20px;
+}
+.exam-gate h2 {
+  margin: 4px 0 8px;
+  font-size: 22px;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+.exam-steps {
+  margin: 8px 0;
+  padding-left: 22px;
+}
+.exam-steps li {
+  margin: 7px 0;
+}
+.exam-steps li::marker {
+  font-weight: 700;
+  color: var(--accent-text);
+}
+.exam-start {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.exam-bar {
+  align-items: flex-end;
+}
+.exam-id-row {
+  display: flex;
+  gap: 8px;
+}
+.field input.exam-id {
+  font-family: var(--mono);
+  font-weight: 700;
+  background: var(--surface-2);
+}
+.exam-switch {
+  margin-left: auto;
+}
+.exam-switch .seg {
+  flex-wrap: wrap;
+}
+.exam-switch .seg button {
+  padding: 6px 14px;
+  font-size: 14px;
+}
+.exam-bar .callout {
+  flex: 1 1 100%;
+  margin: 0;
+}
+.callout-danger {
+  border-color: color-mix(in srgb, var(--danger) 45%, var(--border));
+  background: color-mix(in srgb, var(--danger) 9%, var(--surface));
+}
+.callout-danger .callout-title {
+  color: var(--danger);
+}
+.btn.danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+.btn.danger:hover:not(:disabled) {
+  background: var(--danger);
+  filter: brightness(1.08);
+}
+.exam-card {
+  min-width: 0;
+}
+.exam-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.exam-card-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.exam-card-title h3 {
+  font-size: 16px;
+}
+.exam-card-body {
+  padding: 12px 16px 16px;
+}
+.exam-task {
+  margin: 12px 0 10px;
+  font-size: 14px;
+}
+.exam-card-body > .exam-task:first-child {
+  margin-top: 0;
+}
+.student-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  font-size: 13.5px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.viewport-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+}
+.exam-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.exam-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.viewport.exam-viewport {
+  height: min(48vh, 480px);
+  min-height: 300px;
+}
+.frame-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.fp-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+}
+.fp-name {
+  width: 30px;
+  font-weight: 700;
+}
+.fp-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.fp-axis {
+  width: 22px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--c);
+}
+.fp-group .seg button.on {
+  background: var(--c);
+  color: #fff;
+}
+.joint-table.answer-table {
+  min-width: 460px;
+}
+.answer-input {
+  width: 100%;
+  min-width: 70px;
+  padding: 5px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  background: var(--surface);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+.answer-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+/* The code box grows with its text: a hidden copy of the text sizes the grid cell it shares
+   with the textarea (so a screenshot always shows all of the code). */
+.code-grow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.code-grow::after {
+  content: attr(data-value) ' ';
+  visibility: hidden;
+}
+.code-grow > textarea,
+.code-grow::after {
+  grid-area: 1 / 1 / 2 / 2;
+  min-height: 300px;
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  font: 13px/1.6 var(--mono);
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  tab-size: 4;
+}
+.code-grow > textarea {
+  resize: none;
+  overflow: hidden;
+  background: var(--code-bg);
+  color: var(--text);
+}
+.code-grow > textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+/* Exercise 2: stacked cards, each a 3D view (or the given code) beside its editor */
+.exam-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.exam-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 16px 20px;
+  align-items: start;
+}
+.code.code-given {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 13.5px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.exam-num {
+  width: 64px;
+  padding: 4px 7px;
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+  background: var(--surface);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+.exam-num:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.exam-num.invalid {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 18%, transparent);
+}
+.fp-row-origin {
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.fp-row-origin:last-child {
+  border-bottom: 0;
+}
+.fp-row-origin .fp-name {
+  padding-top: 4px;
+}
+.fp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.fp-origin,
+.fp-axes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+}
+.fp-coord {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--muted);
+}
+.fp-label {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.frame-name {
+  font-size: 11.5px;
+}
+.chain-editor {
+  display: flex;
+  flex-direction: column;
+}
+.chain-joint {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.chain-joint:last-child {
+  border-bottom: 0;
+}
+.chain-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+.chain-name {
+  min-width: 58px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.chain-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.chain-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 6px 0 0 24px;
+}
+.chain-row .seg button.on,
+.chain-row .seg button.on:hover {
+  background: var(--text);
+  color: var(--surface);
+}
+.chain-row.chain-axis .seg button.on,
+.chain-row.chain-axis .seg button.on:hover {
+  background: var(--c-theta);
+  color: #fff;
+}
+.chain-add {
+  padding-left: 4px;
+}
+@media (max-width: 1080px) {
+  .exam-grid,
+  .exam-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 720px) {
+  /* three tabs on a phone */
+  .tab {
+    padding: 6px 8px;
+    font-size: 13px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .tab-num {
+    display: none;
+  }
+  .exam-gate {
+    padding: 16px;
+  }
+  .exam-switch {
+    margin-left: 0;
+  }
+  .exam-switch .seg button {
+    white-space: normal;
+  }
+  .chain-link {
+    margin-left: 0;
+  }
+  /* a segment row (6 directions, length, unit, remove) on one line */
+  .chain-seg {
+    gap: 6px;
+  }
+  .chain-row .seg-sm button {
+    padding: 2px 7px;
+  }
+  .exam-num {
+    width: 54px;
+  }
+}

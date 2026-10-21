@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import BuilderTab from './builder/BuilderTab.jsx';
 import { jointFromLink, useRobotState } from './builder/robotState.js';
 import { BrandMark, Icon } from './components/Icons.jsx';
+import { useExamState } from './exam/examState.js';
+import ExamTab from './exam/ExamTab.jsx';
 import LearnTab from './learn/LearnTab.jsx';
 import { ThemeContext, useThemeState } from './theme.js';
 
 const TABS = [
-  { id: 'learn', label: 'Learn one joint' },
-  { id: 'builder', label: 'Robot builder' },
+  { id: 'learn', num: 1, label: 'Learn one joint' },
+  { id: 'builder', num: 2, label: 'Robot builder' },
+  { id: 'exam', num: 3, label: 'Robot exam' },
 ];
 
 function stored(key, allowed, fallback) {
@@ -21,9 +24,19 @@ function stored(key, allowed, fallback) {
 
 export default function App() {
   const [theme, setTheme] = useThemeState();
-  const [tab, setTab] = useState(() => stored('dh-tab', ['learn', 'builder'], 'learn'));
+  const [tab, setTab] = useState(() => stored('dh-tab', TABS.map((t) => t.id), 'learn'));
   const [builderView, setBuilderView] = useState(() => stored('dh-builder-view', ['build', 'practice'], 'build'));
   const [robot, setRobot] = useRobotState();
+  const [exam, examActions] = useExamState();
+
+  // While an exam is in progress (a student ID is set), the exam is the only tab there is.
+  const locked = exam.id !== '';
+  const current = locked ? 'exam' : tab;
+  const tabs = locked ? TABS.filter((t) => t.id === 'exam') : TABS;
+  // ...and stays the open tab when the exam is cleared.
+  useEffect(() => {
+    if (locked) setTab('exam');
+  }, [locked]);
 
   useEffect(() => {
     try {
@@ -48,16 +61,16 @@ export default function App() {
               </div>
             </div>
             <nav className="tabs" role="tablist" aria-label="Sections">
-              {TABS.map((t, i) => (
+              {tabs.map((t) => (
                 <button
                   key={t.id}
                   type="button"
                   role="tab"
-                  aria-selected={tab === t.id}
+                  aria-selected={current === t.id}
                   className="tab"
                   onClick={() => setTab(t.id)}
                 >
-                  <span className="tab-num">{i + 1}</span>
+                  <span className="tab-num">{t.num}</span>
                   {t.label}
                 </button>
               ))}
@@ -75,14 +88,17 @@ export default function App() {
         </header>
 
         <main className="main">
-          <LearnTab active={tab === 'learn'} />
-          <BuilderTab
-            active={tab === 'builder'}
-            robot={robot}
-            setRobot={setRobot}
-            view={builderView}
-            setView={setBuilderView}
-          />
+          {!locked && <LearnTab active={current === 'learn'} />}
+          {!locked && (
+            <BuilderTab
+              active={current === 'builder'}
+              robot={robot}
+              setRobot={setRobot}
+              view={builderView}
+              setView={setBuilderView}
+            />
+          )}
+          <ExamTab active={current === 'exam'} exam={exam} actions={examActions} />
         </main>
 
         <footer className="footer">

@@ -15,8 +15,10 @@ export function gridFor(s) {
 }
 
 /** Camera pose that frames the robot. */
-export function fitView(frames, s) {
-  const pts = frames.map(pos);
+export const fitView = (frames, s) => fitPoints(frames.map(pos), s);
+
+/** Camera pose that frames a set of points. */
+export function fitPoints(pts, s) {
   const lo = [0, 1, 2].map((i) => Math.min(...pts.map((p) => p[i])));
   const hi = [0, 1, 2].map((i) => Math.max(...pts.map((p) => p[i])));
   const c = scale(add(lo, hi), 0.5);

@@ -39,6 +39,7 @@ export function Viewport({
   grid = { size: 4, divisions: 20, z: 0 },
   overlay,
   className = '',
+  gizmoLabels = ['x', 'y', 'z'],
 }) {
   const pal = useScenePalette();
   const labelLayer = useRef(null);
@@ -71,7 +72,7 @@ export function Viewport({
               disabled
               hideNegativeAxes
               axisColors={AXIS_COLORS}
-              labels={['x', 'y', 'z']}
+              labels={gizmoLabels}
               labelColor="#ffffff"
               font="bold 22px Arial, sans-serif"
             />

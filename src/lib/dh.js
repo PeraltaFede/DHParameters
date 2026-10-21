@@ -83,9 +83,9 @@ export function jointParams(j) {
     : { theta: j.theta, d: q + j.offset, a: j.a, alpha: j.alpha };
 }
 
-/** Frames {0}..{n} of a serial chain (standard DH), as world transforms. */
-export function fkine(joints) {
-  const frames = [identity()];
+/** Frames {0}..{n} of a serial chain (standard DH), as world transforms; `base` is frame {0}. */
+export function fkine(joints, base = identity()) {
+  const frames = [base];
   for (const j of joints) frames.push(mul(frames[frames.length - 1], linkStd(jointParams(j))));
   return frames;
 }
